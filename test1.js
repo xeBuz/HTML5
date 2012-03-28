@@ -16,10 +16,13 @@ function initGlobalVars(){
 
 function initGame(){
 	Crafty.scene("main", function () {
-	for (i=1;i<=COUNT;i++){
-		generateSquare();
-		}	
-    });
+		Crafty.background("red");
+		
+									   
+		for (i=1;i<=COUNT;i++){
+			generateSquare();}	
+	});
+	
 	Crafty.scene("main");
 };
 
@@ -30,12 +33,14 @@ function generateSquare(){
     var posX = Math.floor(Math.random()*HEIGHT) - (dH/2)
 	var posY  =Math.floor(Math.random()*WIDTH) - (dW/2)
 	
-	var sqr = Crafty.e("2D, DOM, Color, MoveTo")
-          .attr({x: posX, y: posY, w: dW, h: dH})
-          .color("red");	 	
+	var sqr = Crafty.e("2D, DOM, Color, MoveTo, Collision")
+					.attr({x: posX, y: posY, w: dW, h: dH})
+					.color("black");
 }
+
 
 // Sacado de CraftyComponents.com
 Crafty.modules({MoveTo: "RELEASE"}, function(){
     Crafty.e("2D, DOM, Color, MoveTo")
 });
+
