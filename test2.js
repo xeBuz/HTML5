@@ -54,12 +54,13 @@ Crafty.c("Player",{
 			   h: this._size})
 		this.requires("Color").color("white");
 		this.requires("Multiway, Collision, Solid");
-		this.addComponent("Collision");
 		
+		// Explota con Enemigos Rojos
 		this.onHit("RedEnemy", function(){
     			this.destroy();
 		})
 
+		// No traspasa los Enemigos Negros
 		this.bind('Moved', function(from) {
 		    if(this.hit('BlackEnemy')) {
        			this.attr({x: from.x, y:from.y});
@@ -91,6 +92,7 @@ Crafty.c("RedEnemy",{
 Crafty.c("BlueEnemy",{
 	init: function(){
 		this.requires("Color").color("blue");
+		// Se destruye al chocar con un "Player"
 		this.onHit("Player", function () {
     			this.destroy();
 		})
@@ -100,9 +102,5 @@ Crafty.c("BlueEnemy",{
 Crafty.c("BlackEnemy",{
 	init: function(){
 		this.requires("Color").color("black");
-		this.onHit("Moved", function () {
-	            if(this.hit('solid')){
-        	      this.attr({x: from.x, y:from.y});}
-		});
 	}
 });
