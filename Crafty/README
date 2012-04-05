@@ -1,0 +1,16 @@
+#  Ejemplos en el uso de Crafty  #
+##################################
+
+1- SigueClick.html
+   Como trabajar con el evento click del mouse
+
+2- Cuadrados.html
+   Formas básicas, cada cuadrado tiene propiedades diferentes con respecto a nuestro jugador, que es manejado por el teclado
+
+3- Apuntar.html
+   Sigue la posicion del mouse, desde un punto especifico
+
+4- Plataformas.html
+   Prueba de 2D, TwoWays, Jumps, Scenes y ViewPorts
+
+
