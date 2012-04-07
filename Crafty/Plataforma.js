@@ -1,106 +1,113 @@
-HEIGHT = 500
-WIDTH = 500
+var HEIGHT = 200
+var WIDTH = 5000
+var level = 1
 
 // Inicia el juego
 function start(){
-	c = Crafty.init(HEIGHT, WIDTH);
+	c = Crafty.init(WIDTH, HEIGHT);
 	Crafty.Canvas;
-
+	
+	Crafty.sprite(16, "kupo.png", {
+    	kupo: [0,0],
+  	});
+  	
+  	     
+  	// Scenes lists: Loading, Game	
+  	Crafty.scene("loading", function() {
+    	Crafty.load(["kupo.png"], function() {
+      		Crafty.scene("game");
+    	});
+    
+    	// Black background with some loading text
+    	Crafty.background("gray");
+    	Crafty.e("2D, DOM, Text").attr({w: 100, h: 20, x: 150, y: 120})
+      		  .text("Loading")
+      		  .css({"text-align": "center"});
+  	});
+  	
 	Crafty.scene("game", function(){
-		Crafty.background("gray");
+        //Crafty.viewport.x = 100;
+        //Crafty.viewport.y = 100;
+
+		CreateLevel(level)
+	});
 	
-		// Pone el jugador en pantalla
-		drawPlayer();
-
-		// Pone los enemigos en pantalla
-		drawEnemies();
-		});
-
-	Crafty.scene("game");
+	Crafty.scene("loading");
 };
 
 
-function drawPlayer(){
-	// El multiway con las teclas no lo puedo definir en el componente Player
-	// ...tengo que ver como se hace
-	Crafty.e("2D, DOM, Player")
-	      .multiway({x:1,y:1}, {UP_ARROW: -90, DOWN_ARROW: 90, RIGHT_ARROW: 0, LEFT_ARROW: 180, 
-		                    W: -90, S: 90, D: 0, A: 180});
-	// Este multiway viene integrado con Crafty, se puede suplantar con 
-	// .bind("enterframe", function(mov){ y definir cada tecla en la funcion }
-	
+// Crea el nivel, modificandolo levemente de acuerdo al parametro que reciba
+// * TO DO - Deberia ir agreandole complejidad, analizar esto despues *
+function CreateLevel (level) {
+	drawFloor();
+	createPlayer();  
+}
+
+// Dibuja el piso. Tiene el tamaño del nivel, es importante para la gravedad del personaje
+function drawFloor(){
+	var size = 5
+	Crafty.e("2D, DOM, Color, Ground")
+		  .attr({x: 0, 
+				 y: HEIGHT - size, 
+			     w: WIDTH,
+			     h: size})
+		  .color("black");
 };
 
-function drawEnemies(){
-	
-	// Coloca los enemigos en el escenario							    
-	for (i=1;i<=5;i++){
-		var red = Crafty.e("2D, DOM, Enemy, RedEnemy");
-		var blue = Crafty.e("2D, DOM, Enemy, BlueEnemy");
-		var black = Crafty.e("2D, DOM, Enemy, BlackEnemy");	
-	}
+// Creacion del Jugador
+// Lo realiza sólo una vez
+function createPlayer(){
+	size = 15;
+	Crafty.e("2D, DOM, Twoway, Gravity, Color, SpriteAnimation") 
+		  .attr({x: 10,	y: 10, w: size, h: size})
+		  .color("white")	
+		  .gravity("Ground")
+    	  .twoway(2,4)
 };
 
 
-Crafty.c("Player",{
-	_size : 15,
-	_posX : Math.floor(Math.random()* HEIGHT),
-	_posY : Math.floor(Math.random()* WIDTH),
-
-	init: function(){
-		this.attr({x: this._posX, 
-			   y: this._posY,
-			   w: this._size,
-			   h: this._size})
-		this.requires("Color").color("white");
-		this.requires("Multiway, Collision, Solid");
-		
-		// Explota con Enemigos Rojos
-		this.onHit("RedEnemy", function(){
-    			this.destroy();
-		})
-
-		// No traspasa los Enemigos Negros
-		this.bind('Moved', function(from) {
-		    if(this.hit('BlackEnemy')) {
-       			this.attr({x: from.x, y:from.y});
-		   }
-		})
-	}
-});
 
 
-// El componente Enemy es generico para los 3 tipos de enemigos, establece el 
-// tamaño y la posición aleatoria en donde se crea
-Crafty.c("Enemy",{
-	_size : 10,
-	init: function(){
-		this.attr({x: Math.floor(Math.random()* HEIGHT),
-			   y: Math.floor(Math.random()* WIDTH),
-			   w: this._size,
-			   h: this._size})
-		this.requires("Collision, Solid");
-	}
-});
 
-Crafty.c("RedEnemy",{
-	init: function(){
-		this.requires("Color").color("red");
-	}
-});
 
-Crafty.c("BlueEnemy",{
-	init: function(){
-		this.requires("Color").color("blue");
-		// Se destruye al chocar con un "Player"
-		this.onHit("Player", function () {
-    			this.destroy();
-		})
-	}
-});
 
-Crafty.c("BlackEnemy",{
-	init: function(){
-		this.requires("Color").color("black");
-	}
-});
+Crafty.c('CustomControls', {
+    __move: {left: false, right: false, up: false, down: false},    
+    _speed: 3,
+
+    CustomControls: function(speed) {
+      if (speed) this._speed = speed;
+      var move = this.__move;
+
+      this.bind('enterframe', function() {
+        // Move the player in a direction depending on the booleans
+        // Only move the player in one direction at a time (up/down/left/right)
+        if (move.right) this.x += this._speed; 
+        else if (move.left) this.x -= this._speed; 
+        else if (move.up) this.y -= this._speed;
+        else if (move.down) this.y += this._speed;
+      }).bind('keydown', function(e) {
+        // Default movement booleans to false
+        move.right = move.left = move.down = move.up = false;
+
+        // If keys are down, set the direction
+        if (e.keyCode === Crafty.keys.RA) move.right = true;
+        if (e.keyCode === Crafty.keys.LA) move.left = true;
+        if (e.keyCode === Crafty.keys.UA) move.up = true;
+        if (e.keyCode === Crafty.keys.DA) move.down = true;
+
+        this.preventTypeaheadFind(e);
+      }).bind('keyup', function(e) {
+        // If key is released, stop moving
+        if (e.keyCode === Crafty.keys.RA) move.right = false;
+        if (e.keyCode === Crafty.keys.LA) move.left = false;
+        if (e.keyCode === Crafty.keys.UA) move.up = false;
+        if (e.keyCode === Crafty.keys.DA) move.down = false;
+
+        this.preventTypeaheadFind(e);
+      });
+
+      return this;
+    }
+  });
+
