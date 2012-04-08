@@ -1,5 +1,5 @@
-var HEIGHT = 200
-var WIDTH = 5000
+var HEIGHT = 300
+var WIDTH = 400
 var level = 1
 
 // Inicia el juego
@@ -13,7 +13,7 @@ function start(){
   	  	     
   	// Scenes lists: Loading, Game	
   	Crafty.scene("loading", function() {
-    	Crafty.load(["kupo.png"], function() {
+    	Crafty.load(["images/kupo.png"], function() {
       		Crafty.scene("game");
     	});
     
@@ -24,8 +24,13 @@ function start(){
   	});
   	
 	Crafty.scene("game", function(){
-        //Crafty.viewport.x = 100;
-        //Crafty.viewport.y = 100;
+		// Crea la "cámara/viewport", establece un area visible en el mapa sin importar el tamaño del mismo
+		Crafty.viewport.init(HEIGHT, HEIGHT); 
+		
+		// La setea en el inicio
+        Crafty.viewport.x = 0;
+        Crafty.viewport.y = 0;
+        
         Crafty.e("2D, DOM, Solid, Color, Ground, Collision")
         	  .attr({x: 10, 
 			   		 y: 160,
@@ -33,7 +38,15 @@ function start(){
 			   		 h: 12})
 			  .color("white");
 
-		CreateLevel(level)
+     	Crafty.e("2D, DOM, Solid, Color, Ground, Collision")
+        	  .attr({x: 150, 
+			   		 y: 160,
+			   		 w: 10,
+			   		 h: 12})
+			  .color("white");
+			  
+			  
+		CreateLevel(level);
 	});
 	
 	Crafty.scene("loading");
@@ -43,14 +56,13 @@ function start(){
 // Crea el nivel, modificandolo levemente de acuerdo al parametro que reciba
 // * TO DO - Deberia ir agreandole complejidad, analizar esto despues *
 function CreateLevel (level) {
-	drawFloor();
+	createFloor();
 	createPlayer();  
+	createRain();
 }
 
-
-
 // Dibuja el piso. Tiene el tamaño del nivel, es importante para la gravedad del personaje
-function drawFloor(){
+function createFloor(){
 	var size = 5
 	
 	// Suelo
@@ -68,151 +80,53 @@ function drawFloor(){
 			     w: size,
 			     h: HEIGHT})
 		  .color("black");
+	Crafty.e("2D, DOM, Color, Ground")
+		  .attr({x: 0, 
+				 y: 0, 
+			     w: size,
+			     h: HEIGHT})
+		  .color("black");
 
 };
 
+function createRain(){
+	for (var i=0; i < 3; i++) {
+	  var block = Crafty.e("2D, DOM, Block")
+	}		
+}
 
-// Creacion del Jugador
-// Lo realiza sólo una vez
+// Coloca el jugador en pantalla
 function createPlayer(){
-	size = 16;
-	Crafty.e("2D, DOM, Twoway, Gravity, Keyboard, Kupo, SpriteAnimation") 
-		  .attr({x: 10,	y: 10, z: 1, w: size, h: size})
-		  //.color("white")	
-		  .gravity("Ground")
-    	  .twoway(3,4)
-    	  .animate("nada", 9, 3, 11)
-          
-          .bind("enterframe", function() {
-              if (!this.isPlaying())
-                this.animate("nada", 80);
-            });
-          
-          
-		  //.CustomControls(1)
-		  /*.animate("left", 5, 1, 8)
-		  
-		  .animate("jump", 1, 1, 4)
-		  .bind("enterframe", function(e) {
-    	  		if (this.__move.left) {
-      				if (!this.isPlaying("left"))
-        				this.stop().animate("left", 10);
-    				}
-    			if (this.__move.right) {
-      				if (!this.isPlaying("right"))
-        				this.stop().animate("right", 10);
-    				}
-    			if (this.__move.up) {
-      				if (!this.isPlaying("jump"))
-        				this.stop().animate("jump", 10);
-    				}
-    			if (this.__move.down) {
-      				if (!this.isPlaying("down"))
-        				this.stop().animate("down", 10);
-    				}
-  		  }).bind("keyup", function(e) {
-    			this.stop();
-  		  });
-*/
+	player = Crafty.e("2D, DOM, Player")
 };
 
 
+// Componentes
+Crafty.c("Player",{
+	_size : 16,
+	init: function(){
+		  		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
+		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation")
+		  		   this.gravity("Ground")
+    	       	   this.twoway(2,2)
+    	           this.animate("left", 9, 3, 11)
 
 
+		}
+});
 
-
-
-Crafty.c('CustomControls', {
-    __move: {left: false, right: false, up: false, down: false},    
-    _speed: 3,
-
-    CustomControls: function(speed) {
-      if (speed) this._speed = speed;
-      var move = this.__move;
-
-      this.bind('enterframe', function() {
-        // Move the player in a direction depending on the booleans
-        // Only move the player in one direction at a time (up/down/left/right)
-        if (move.right) this.x += this._speed; 
-        else if (move.left) this.x -= this._speed; 
-        else if (move.up) this.y -= this._speed;
-        else if (move.down) this.y += this._speed;
-      }).bind('keydown', function(e) {
-        // Default movement booleans to false
-        move.right = move.left = move.down = move.up = false;
-
-        // If keys are down, set the direction
-        if (e.keyCode === Crafty.keys.RA) move.right = true;
-        if (e.keyCode === Crafty.keys.LA) move.left = true;
-        if (e.keyCode === Crafty.keys.UA) move.up = true;
-        if (e.keyCode === Crafty.keys.DA) move.down = true;
-
-        this.preventTypeaheadFind(e);
-      }).bind('keyup', function(e) {
-        // If key is released, stop moving
-        if (e.keyCode === Crafty.keys.RA) move.right = false;
-        if (e.keyCode === Crafty.keys.LA) move.left = false;
-        if (e.keyCode === Crafty.keys.UA) move.up = false;
-        if (e.keyCode === Crafty.keys.DA) move.down = false;
-
-        this.preventTypeaheadFind(e);
-      });
-
-      return this;
-    }
-  });
-  
-Crafty.c("TrackView", {
-		_buffer: 64,
-		_target: {x: 0, y:0},
-		init: function(){
-			this._target.x = Crafty.viewport.x;
-			this._target.y = Crafty.viewport.y;
-			this.bind("enterframe",function(){
-				screenx = (this.x + (this._w / 2)) + Crafty.viewport.x;
-				screeny = (this.y + (this._h / 2)) + Crafty.viewport.y;
-				if (screenx < this._buffer){
-					Crafty.viewport.x += this._speed;
-				} else if (screenx > (Crafty.viewport.width - this._buffer)) {
-					Crafty.viewport.x -= this._speed;
-				}
-				if (screeny < this._buffer){
-					Crafty.viewport.y += this._speed;
-				} else if (screeny > (Crafty.viewport.height - this._buffer)) {
-					Crafty.viewport.y -= this._speed;
-				}
-			});
-		},	
-	  });
-	  Crafty.c("View", {
-		init: function(){
-			this.addComponent("2D");
-			this.addComponent("Canvas");
-			this._tx = 0;
-			this._ty = 0;
-			if(Crafty.support.setter) {
-				this.__defineSetter__('tx', function(v) { this._set_tx(v); });
-				this.__defineGetter__('tx', function() { return this._tx; });
-				this.__defineSetter__('ty', function(v) { this._set_ty(v); });
-				this.__defineGetter__('ty', function() { return this._ty; });
-			}
-		},
-		_set_tx: function(v){
-			this._tx = v;
-			this.x = (this._tx + (Crafty.viewport.width/2)) - (this._w / 2);
-		},
-		_set_ty: function(v){
-			this._ty = v;
-			this.y = ((-this._ty + (Crafty.viewport.height/2))) - (this._h / 2);
-		},
-		t: function(x, y){
-			if (typeof x === "object"){
-				y = x.y;
-				x = x.x;
-			}
-			this.tx = x;
-			this.ty = y;
-			return this;
-		},
-	  })  
-
+Crafty.c("Block",{
+	_size : 20,
+	_dim : 50, //Crafty.viewport.x
+	_grid : this.dim / this.size,
+	_pos :  Math.floor(Math.random()* this.dim),
+	init: function(){ 
+			this.requires("2D, DOM, Solid, Color, Gravity, Collision")
+    	  	this.attr({x: this.pos, 
+		   	    	   y: 20,
+		   		   	   w: this.size,
+		   		   	   h: this.size})
+		  	this.color("red")
+		  	this.gravity("Ground")
+		}
+});	
