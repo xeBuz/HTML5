@@ -66,33 +66,31 @@ function createFloor(){
 	var size = 5
 	
 	// Suelo
-	Crafty.e("2D, DOM, Color, Ground")
+	Crafty.e("2D, DOM, Ground")
 		  .attr({x: 0, 
 				 y: HEIGHT - size, 
 			     w: WIDTH,
-			     h: size})
-		  .color("black");
+			     h: size});
 		  
     // Paredes
-	Crafty.e("2D, DOM, Color, Ground")
+	Crafty.e("2D, DOM, Ground")
 		  .attr({x: WIDTH - size, 
 				 y: 0, 
 			     w: size,
-			     h: HEIGHT})
-		  .color("black");
-	Crafty.e("2D, DOM, Color, Ground")
+			     h: HEIGHT});
+
+	Crafty.e("2D, DOM, Ground")
 		  .attr({x: 0, 
 				 y: 0, 
 			     w: size,
-			     h: HEIGHT})
-		  .color("black");
+			     h: HEIGHT});
 
 };
 
 function createRain(){
-	for (var i=0; i < 3; i++) {
+	//for (i=1;i<=5;i++){
 	  var block = Crafty.e("2D, DOM, Block")
-	}		
+	//}		
 }
 
 // Coloca el jugador en pantalla
@@ -108,25 +106,48 @@ Crafty.c("Player",{
 		  		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
 		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation")
 		  		   this.gravity("Ground")
-    	       	   this.twoway(2,2)
-    	           this.animate("left", 9, 3, 11)
-
-
+    	       	   this.twoway(3,4)
+  	    
 		}
 });
 
 Crafty.c("Block",{
-	_size : 20,
-	_dim : 50, //Crafty.viewport.x
-	_grid : this.dim / this.size,
-	_pos :  Math.floor(Math.random()* this.dim),
+	size : 20,
+	
+	/*
+	
+	posFrom : 0, // Este valor los debe sacar del viewport
+	posTo: HEIGHT, // Este valor los debe sacar del viewport
+	dim: 300, //(this.posTo - this.posFrom),
+	div: (300 / 20), //this.dim / this.size,
+	pos: 30, //(Math.floor(Math.random()* this.div) * this.size) 	
+	*/
+	
 	init: function(){ 
-			this.requires("2D, DOM, Solid, Color, Gravity, Collision")
-    	  	this.attr({x: this.pos, 
+			this.requires("Solid, Color, Gravity, Collision")
+    	  	this.attr({x: 40, //this.pos 
 		   	    	   y: 20,
 		   		   	   w: this.size,
 		   		   	   h: this.size})
 		  	this.color("red")
 		  	this.gravity("Ground")
+		  	// Explota con Enemigos Rojos
+			this.onHit("Player", function(){
+				if (this.Color = "red"){ 
+					//Alert("Pega")
+					}
+	    	})
+			this.onHit("Ground", function(){
+				this.requires("Ground")
+				this.color("black")			
+			})	    				
+	    				
 		}
+});	
+
+Crafty.c("Ground",{
+	init: function(){ 
+			this.requires("Solid, Color, Collision")
+			this.color("black")
+	}
 });	
