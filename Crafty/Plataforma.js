@@ -107,15 +107,27 @@ Crafty.c("Player",{
 		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation")
 		  		   this.gravity("Ground")
     	       	   this.twoway(3,4)
-  	    
-		}
+    	       	   // No traspasa los Enemigos Negros
+				   this.bind('Moved', function(from) {
+					    if( this.Hit('Block') ) {
+       						this.attr({x: from.x, y:from.y})
+		   				}
+		   			})
+		  }
+		    
 });
+
+Crafty.c("Ground",{
+	init: function(){ 
+			this.requires("Solid, Color, Collision")
+			this.color("black")
+	}
+});	
 
 Crafty.c("Block",{
 	size : 20,
 	
 	/*
-	
 	posFrom : 0, // Este valor los debe sacar del viewport
 	posTo: HEIGHT, // Este valor los debe sacar del viewport
 	dim: 300, //(this.posTo - this.posFrom),
@@ -124,30 +136,39 @@ Crafty.c("Block",{
 	*/
 	
 	init: function(){ 
-			this.requires("Solid, Color, Gravity, Collision")
+			this.requires("Solid, Color, Collision")
     	  	this.attr({x: 40, //this.pos 
 		   	    	   y: 20,
 		   		   	   w: this.size,
 		   		   	   h: this.size})
-		  	this.color("red")
-		  	this.gravity("Ground")
-		  	// Explota con Enemigos Rojos
-			this.onHit("Player", function(){
-				if (this.Color = "red"){ 
-					//Alert("Pega")
-					}
-	    	})
+		   	/*	   	   
 			this.onHit("Ground", function(){
 				this.requires("Ground")
 				this.color("black")			
-			})	    				
+			})
+			*/	    				
 	    				
 		}
 });	
 
-Crafty.c("Ground",{
-	init: function(){ 
-			this.requires("Solid, Color, Collision")
-			this.color("black")
+Crafty.c("Falling",{
+	
+	init: function(){
+		this.requires("Gravity")
+		this.color("#585858")
+		
+		this.onHit("Ground", function(){
+			this.requires("OnGround")
+		})	
 	}
-});	
+	
+});
+
+Crafty.c("OnGround", {
+	init: function(){
+		this.color("black")
+		this.removeComponent("Gravity")
+		this.requires("Ground")
+	
+	}	
+});
