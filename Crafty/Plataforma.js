@@ -89,7 +89,7 @@ function createFloor(){
 
 function createRain(){
 	//for (i=1;i<=5;i++){
-	  var block = Crafty.e("2D, DOM, Block")
+	  var block = Crafty.e("2D, DOM, Block, Falling")
 	//}		
 }
 
@@ -108,11 +108,14 @@ Crafty.c("Player",{
 		  		   this.gravity("Ground")
     	       	   this.twoway(3,4)
     	       	   // No traspasa los Enemigos Negros
-				   this.bind('Moved', function(from) {
+				   /*
+				    
+				    this.bind('Moved', function(from) {
 					    if( this.Hit('Block') ) {
        						this.attr({x: from.x, y:from.y})
 		   				}
-		   			})
+		   				
+		   			})*/
 		  }
 		    
 });
@@ -152,13 +155,13 @@ Crafty.c("Block",{
 });	
 
 Crafty.c("Falling",{
-	
 	init: function(){
-		this.requires("Gravity")
+		this.requires("Gravity").gravity("Ground")
 		this.color("#585858")
 		
 		this.onHit("Ground", function(){
-			this.requires("OnGround")
+			this.color("red")
+			//this.requires("OnGround")
 		})	
 	}
 	
@@ -171,4 +174,8 @@ Crafty.c("OnGround", {
 		this.requires("Ground")
 	
 	}	
+	
+/*function Choque(){
+		
+	}*/
 });
