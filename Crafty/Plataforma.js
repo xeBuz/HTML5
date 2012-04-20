@@ -89,7 +89,7 @@ function createFloor(){
 
 function createRain(){
 	//for (i=1;i<=5;i++){
-	  var block = Crafty.e("2D, DOM, Block, Falling")
+	  var block = Crafty.e("2D, DOM, Block, Falling, Ground")
 	//}		
 }
 
@@ -104,7 +104,7 @@ Crafty.c("Player",{
 	_size : 16,
 	init: function(){
 		  		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
-		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation")
+		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation, Collision")
 		  		   this.gravity("Ground")
     	       	   this.twoway(3,4)
     	       	   // No traspasa los Enemigos Negros
