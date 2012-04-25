@@ -2,18 +2,17 @@
 
 function createBlocks(SPEED, TIME, SIZE){
 
-	Crafty.e().bind("enterframe", function(e) {
+	/*Crafty.e().bind("enterframe", function(e) {
 		var sparsity = Crafty.randRange(10, 50);
 		if(e.frame % sparsity == 0) {
 			Crafty.e("2D, DOM, fruit, Gravity, Mouse").gravity("floor");
 		}
-	});
+	});*/
 	
+
   	for (i=1;i<=5;i++){
-	 	var block = Crafty.e("2D, DOM, Block")
-	 	block.drop()
-	}
-	 
+		var block = Crafty.e("2D, DOM, Block")
+	} 
 };
 
 
@@ -35,6 +34,7 @@ Crafty.c("Block",{
 			this.requires("Solid, Color, Collision")		   		   	   
 			//this.color("#585858")
 			this.color("black")
+			this.delay (function() {this.drop()}, 500);
 		},
 		
 	drop: function(){

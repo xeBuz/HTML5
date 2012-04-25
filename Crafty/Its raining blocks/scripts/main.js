@@ -30,10 +30,30 @@ Crafty.scene("game", function(){
 	Crafty.e("2D, DOM, Image")
           .attr({w: Crafty.viewport.width, h: Crafty.viewport.height})
           .image("images/wall.jpg", "repeat");
-          	  
+        
+	Crafty.e("2D, DOM, drawFPS");
+  
 	createFloor();	  
 	createLevel(level);
 });
+
+
+//FPS component
+Crafty.c("drawFPS", {
+        init: function() {
+                var fps=0;
+                this.attr({ w: 111, 
+			    h: 12, 
+			    x: 20, 
+			    y: 20, 
+			    z: 3 });
+		this.requires("Timer, Text")
+                this.bind("EnterFrame", function(){
+                        fps = Crafty.timer.getFPS();
+                                this.text("FPS: "+ fps);
+                });
+        }
+}); 
 
 
 // Scenes lists: Loading, Game	
