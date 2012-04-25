@@ -17,7 +17,6 @@ function createBlocks(SPEED, TIME, SIZE){
 
 
 
-
 Crafty.c("Block",{ 
 	size    : 20,
 	posFrom : 0, 
