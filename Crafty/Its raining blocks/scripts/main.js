@@ -17,11 +17,6 @@ function LoadSprites(){
 	Crafty.sprite(25, "images/kupo.png", {
     	PlayerSprite: [0,0],
   	}); 	
-	
-//	Crafty.sprite(16, "images/FF.gif", {
-//		PlayerSprite: [0,3],
-//  	}); 	
-
 }
 
 
@@ -36,7 +31,7 @@ Crafty.scene("game", function(){
           .attr({w: Crafty.viewport.width, h: Crafty.viewport.height})
           .image("images/wall.jpg", "repeat");
         
-	Crafty.e("2D, DOM, drawFPS");
+//	Crafty.e("2D, DOM, drawFPS");
   
 	createFloor();	
 	createPlayer();  
