@@ -14,9 +14,14 @@ function start(){
 
 
 function LoadSprites(){
-	Crafty.sprite(16, "images/example.png", {
-    	Kupo: [0,3],
+	Crafty.sprite(25, "images/kupo.png", {
+    	PlayerSprite: [0,0],
   	}); 	
+	
+//	Crafty.sprite(16, "images/FF.gif", {
+//		PlayerSprite: [0,3],
+//  	}); 	
+
 }
 
 
@@ -33,8 +38,10 @@ Crafty.scene("game", function(){
         
 	Crafty.e("2D, DOM, drawFPS");
   
-	createFloor();	  
+	createFloor();	
+	createPlayer();  
 	createLevel(level);
+	
 });
 
 

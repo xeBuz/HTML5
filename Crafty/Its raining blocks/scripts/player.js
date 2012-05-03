@@ -1,21 +1,10 @@
-
-
-Crafty.c("Player",{
-	_size : 16,
+Crafty.c("MainPlayer",{
+	_size : 25,
 	init: function(){
 		  		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
-		  		   this.requires("Twoway, Gravity, Keyboard, Kupo, SpriteAnimation, Collision")
-		  		   this.gravity("Ground")
+		  		   this.requires("Twoway, Gravity, Keyboard, PlayerSprite, SpriteAnimation, Collision")
+		  		   this.gravity("Floor")
     	       	   this.twoway(3,4)
-    	       	   // No traspasa los Enemigos Negros
-				   /*
-				    
-				    this.bind('Moved', function(from) {
-					    if( this.Hit('Block') ) {
-       						this.attr({x: from.x, y:from.y})
-		   				}
-		   				
-		   			})*/
 		  }
 		    
 });
@@ -23,6 +12,6 @@ Crafty.c("Player",{
 
 
 function createPlayer(){
-	player = Crafty.e("2D, DOM, Player")	
+	player = Crafty.e("2D, DOM, MainPlayer")	
 }
 

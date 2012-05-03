@@ -4,8 +4,6 @@ var TIME = 1
 var SIZE = 20
 
 function createLevel(numLvl){
-	
-	
 	createWorld()
 	createBlocks(SPEED, TIME, SIZE)
 
