@@ -15,7 +15,7 @@ function start(){
 
 function LoadSprites(){
 	Crafty.sprite(25, "images/kupo.png", {
-    	PlayerSprite: [0,0],
+    	PlayerSprite: [1,0],
   	}); 	
 	
 //	Crafty.sprite(16, "images/FF.gif", {
