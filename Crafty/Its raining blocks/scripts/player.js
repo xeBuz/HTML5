@@ -1,12 +1,21 @@
 Crafty.c("MainPlayer",{
 	_size : 25,
+	_life : 100,
 	init: function(){
 		  		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
 		  		   this.requires("Twoway, Gravity, Keyboard, PlayerSprite, SpriteAnimation, Collision")
 		  		   this.gravity("Floor")
     	       	   this.twoway(3,3.3)
+    	       	   
+				   this.bind('Moved', function(from) {
+				   		if(this.hit('Block')) {
+				       		this.attr({x: from.x, y:from.y});
+				       	}
+					})
+					
 		  }
-		    
+		
+
 });
 
 
