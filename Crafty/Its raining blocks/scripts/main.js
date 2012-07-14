@@ -25,8 +25,8 @@ Crafty.scene("game", function(){
 	Crafty.viewport.init(WIDTH, HEIGHT); 
 	
 	// La setea en el inicio
-    Crafty.viewport.x = 0;
-    Crafty.viewport.y = 0;
+        Crafty.viewport.x = 0;
+        Crafty.viewport.y = 0;
 	Crafty.e("2D, DOM, Image")
           .attr({w: Crafty.viewport.width, h: Crafty.viewport.height})
           .image("images/wall.jpg", "repeat");

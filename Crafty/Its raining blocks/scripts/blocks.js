@@ -2,19 +2,13 @@
 
 function createBlocks(SPEED, TIME, SIZE){
 
-	/*Crafty.e().bind("enterframe", function(e) {
-		var sparsity = Crafty.randRange(10, 50);
-		if(e.frame % sparsity == 0) {
-			Crafty.e("2D, DOM, fruit, Gravity, Mouse").gravity("floor");
-		}
-	});*/
-	
+	// Entra en un loop que va generando los bloques.
+	(function(){
+	    var block = Crafty.e("2D, DOM, Block")
+      	        setTimeout(arguments.callee, TIME);
+	})();
 
-  	for (i=1;i<=5;i++){
-		var block = Crafty.e("2D, DOM, Block")
-	} 
 };
-
 
 
 Crafty.c("Block",{ 
@@ -22,23 +16,41 @@ Crafty.c("Block",{
 	posFrom : 0, 
 	posTo   : WIDTH, // This is for a To Do. A movable scene.
 	div     : 0,
-	//pos     : 30, 	
 	
 	init: function(){
-		    this.div = ((this.posTo - this.posFrom) / this.size),
-    	  	this.attr({x: Math.floor(Math.random() * this.div ) * this.size,  // 30,
+			this.div = ((this.posTo - this.posFrom) / this.size),
+			this.requires("Solid, Color, Collision, Delay"),
+    	  		this.attr({x: Math.floor(Math.random() * this.div ) * this.size,  // 30,
 		   	    	   y: 0,
-		   		   	   w: this.size,
-		   		   	   h: this.size})
-			this.requires("Solid, Color, Collision")		   		   	   
-			//this.color("#585858")
+		   		   w: this.size,
+		   		   h: this.size})  	   
 			this.color("black")
-			this.delay (function() {this.drop()}, 500);
+
+		/*	this.bind('Moved', function(from) {
+				if(this.hit('Floor')){
+					this.requires("Gravity").gravity("Block")
+				}
+				if (this.hit('Block')){
+					this.requires("Gravity").gravity("Block")
+				}
+			});
+               */
+
+			this.delay(function() {this.drop()}, 500);
+
+
 		},
-		
+   	 	
 	drop: function(){
 			//this.attr({ this.x: (Math.floor(Math.random()* this.div) * this.size) })
 			this.requires("Gravity").gravity("Floor")
-								
+						
 	}
+
+
+
+//		if(this.hit('solid')) {
+//			this.attr({x: from.x, y:from.y});
+//		} 
+
 });	

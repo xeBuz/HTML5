@@ -1,6 +1,5 @@
 var SPEED = 0
-var TIME = 1 
-
+var TIME = 300
 var SIZE = 20
 
 function createLevel(numLvl){

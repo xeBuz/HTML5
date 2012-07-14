@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example 01 - GameJS</title>
+
+    <script src="javascript/main.js"></script>
+    <script src="../lib/gamejs.min.js"></script>
+    <script>
+        require.setModuleRoot('./javascript/');
+        require.run('main');
+    </script>
+</head>
+<body>
+
+    <div>
+        <div id="gjs-loader">
+         Loading...
+        </div>
+        <canvas id="gjs-canvas"></canvas>
+        <p>
+        Powered by <a href="http://gamejs.org">GameJs</a>.
+        </p>
+    </div>
+
+
+</body>

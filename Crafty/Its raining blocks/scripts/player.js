@@ -1,5 +1,5 @@
 Crafty.c("MainPlayer",{
-	_size : 25,
+	_size : 20,
 	_life : 100,
 	_speed: 3,
 	_jump: 3.3,
@@ -17,11 +17,33 @@ Crafty.c("MainPlayer",{
 	}
 });
 
+Crafty.c("TestPlayer",{
+	size    : 20,
+
+	init: function(){
+			this.requires("Solid, Color, Collision, Gravity, Gravity, Twoway"),
+    	  		this.attr({x: 30,  // 30,
+		   	    	   y: 30,
+		   		   w: this.size,
+		   		   h: this.size})  	   
+			this.color("red")
+			this.gravity("Floor")
+			this.twoway(3,3)
+		        
+//			this.bind('Moved', function(from) {
+//		   		if(this.hit('Block')) {
+//			       		this.attr({x: from.x, y:from.y});
+//			       	}
+//			})
+			
+	}
+		
+});
 
 
 function createPlayer(){
-	player = Crafty.e("2D, DOM, MainPlayer, Controls")	
-}
+	player = Crafty.e("2D, DOM, TestPlayer")	
+};
 
 
 // Ejemplo sacado de la web
