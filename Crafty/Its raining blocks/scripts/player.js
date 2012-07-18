@@ -5,7 +5,7 @@ Crafty.c("MainPlayer",{
 	_jump: 3.3,
 	init: function(){
   		   this.attr({x: 10, y: 10, z: 1, w: this.size, h: this.size})
-  		   this.requires("Twoway, Gravity, Keyboard, PlayerSprite, SpriteAnimation, Collision")
+  		   this.requires("Twoway, Gravity, Keyboard, Collision, Solid")
   		   this.gravity("Floor")
   		   this.twoway(this.speed,this.jump)
    
@@ -30,11 +30,11 @@ Crafty.c("TestPlayer",{
 			this.gravity("Floor")
 			this.twoway(3,3)
 		        
-//			this.bind('Moved', function(from) {
-//		   		if(this.hit('Block')) {
-//			       		this.attr({x: from.x, y:from.y});
-//			       	}
-//			})
+		   this.bind('Moved', function(from) {
+		   		if(this.hit('Block')) {
+		       		this.attr({x: from.x, y:from.y});
+		       	}
+		   })
 			
 	}
 		

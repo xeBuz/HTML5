@@ -26,6 +26,19 @@ Crafty.c("Block",{
 		   		   h: this.size})  	   
 			this.color("black")
 
+			/*
+			this.onHit("Block", function(from){
+				this.attr({x: from.x, y:from.y})
+			});
+			*/
+  			
+  			this.bind('EnterFrame', function() {
+		    	if(this.hit('Moved')) {
+       				this.attr({x: from.x, y:from.y});
+       			}   
+  			});
+
+
 		/*	this.bind('Moved', function(from) {
 				if(this.hit('Floor')){
 					this.requires("Gravity").gravity("Block")
@@ -43,14 +56,7 @@ Crafty.c("Block",{
    	 	
 	drop: function(){
 			//this.attr({ this.x: (Math.floor(Math.random()* this.div) * this.size) })
-			this.requires("Gravity").gravity("Floor")
-						
+			this.requires("Gravity").gravity("Solid")					
+			
 	}
-
-
-
-//		if(this.hit('solid')) {
-//			this.attr({x: from.x, y:from.y});
-//		} 
-
 });	
