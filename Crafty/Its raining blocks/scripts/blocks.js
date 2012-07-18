@@ -32,13 +32,14 @@ Crafty.c("Block",{
 			});
 			*/
   			
+  			/*
   			this.bind('EnterFrame', function() {
 		    	if(this.hit('Moved')) {
        				this.attr({x: from.x, y:from.y});
        			}   
   			});
 
-
+			*/
 		/*	this.bind('Moved', function(from) {
 				if(this.hit('Floor')){
 					this.requires("Gravity").gravity("Block")
