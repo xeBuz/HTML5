@@ -21,7 +21,7 @@ Crafty.c("TestPlayer",{
 	size    : 20,
 
 	init: function(){
-			this.requires("Solid, Color, Collision, Gravity, Gravity, Twoway"),
+			this.requires("Solid, Color, Collision,  Gravity, Twoway"),
     	  		this.attr({x: 30,  // 30,
 		   	    	   y: 30,
 		   		   w: this.size,
