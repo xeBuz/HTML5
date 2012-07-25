@@ -50,6 +50,7 @@ function createPlayer(){
 Crafty.c('Controls',{
 	_move:  {left: false, right: false, up: false, down: false}, 
 	_speed: 3,
+	_wasd : false
 
 	Controls: function(speed){
 	   	if (speed) this._speed = speed;
