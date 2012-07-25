@@ -79,7 +79,7 @@ function createFloor(){
 			     w: WIDTH,
 			     h: size});
 	
-	/*	  
+		  
     // Create the Walls
 	Crafty.e("2D, DOM, Floor")
 		  .attr({x: WIDTH - size,
@@ -92,14 +92,13 @@ function createFloor(){
 			     w: size,
 			     h: HEIGHT});
 
-	*/
 };
 
 
 Crafty.c("Floor",{
 	init: function(){ 
 			this.requires("Solid, Color, Collision")
-			this.color("white")
+			this.color("Black")
 			
 	}
 });	
