@@ -22,15 +22,25 @@ Crafty.scene("Menu", function(){
 
 Crafty.scene("Game", function(){
   
-  	//createDisplay()
+  	createDisplay()
 	createFloor();	
 	createPlayers();  
 	//createLevel(level);
-	
+
+	function ChangeColor(){
+		do {
+			temp_color =  colors[Math.floor(Math.random()*colors.length)]
+		}
+		while ((temp_color != color_left) && (temp_color != color_right));
+
+		//return temp_colors
+		
+	}	
 });
 
 
 Crafty.scene("Pause", function(){
+
 	
 });
 

@@ -5,8 +5,8 @@ LIFE = 100
 SIZE = 30
 
 function createPlayers(){
-	pBlue = Crafty.e("2D, DOM, Player, BluePlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
-	pRed = Crafty.e("2D, DOM, Player, RedPlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	pBlue = Crafty.e("2D, DOM, Player, LeftPlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	pRed = Crafty.e("2D, DOM, Player, RightPlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
 
 };
 
@@ -18,7 +18,7 @@ Crafty.c("Player",{
 
 	init: function(){
 		this.requires("2D, DOM, Solid, Color, Collision, SolidHitBox, Gravity, Twoway, Delay")
-		this.gravity("Floor").gravityConst(0.1)					
+		this.gravity("Floor").gravityConst(0.085)					
 		
 
 		this.bind('EnterFrame', function(from) {
@@ -65,25 +65,25 @@ Crafty.c("Player",{
 });	
 
 
-Crafty.c("RedPlayer",{
+Crafty.c("RightPlayer",{
 	init: function(){
 		this.attr({x: 30,  // 30,
 		   	       y: 30,
 		   		   w: this._size,
 		   		   h: this._size})  
-		this.color("Red")
+		this.color(color_right)
 		this.multiway(this._speed, { W: -90, A: 180, D: 0 });						
 		
 	},
 });	
 
-Crafty.c("BluePlayer",{
+Crafty.c("LeftPlayer",{
 	init: function(){
 		this.attr({x: 100,  // 30,
    	       y: 100,
    		   w: this._size,
    		   h: this._size})  
-		this.color("Blue")	
+		this.color(color_left)	
 		this.multiway(this._speed, {UP_ARROW: -90, RIGHT_ARROW: 0, LEFT_ARROW: 180 });
 	}
 });	
