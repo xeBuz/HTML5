@@ -23,8 +23,11 @@ Crafty.c("Player",{
 		// Border Radius CSS
 		this.css("-webkit-border-radius", "5px");
 		this.css("-moz-border-radius", "5px");
-		this.css("border-radius", "5px");				
-						
+		this.css("border-radius", "5px");	
+
+		this.css("border-style", "solid");	
+		this.css("border-width", "1px");	
+		this.css("border-color", "000000");	
 
 		this.bind('EnterFrame', function(from) {
 		    if(this.hit('Player')) {
