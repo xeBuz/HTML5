@@ -13,6 +13,9 @@ function start(){
 	Crafty.Canvas;
 		
 	Crafty.scene("LoadResources");
+
+
+
 };
 
 
