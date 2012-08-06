@@ -20,7 +20,7 @@ Crafty.c("Player",{
 		this.requires("2D, DOM, Solid, Color, Collision, SolidHitBox, Gravity, Twoway, Delay")
 		this.gravity("Floor").gravityConst(0.085)	
 		
-		// Border Radius CSS
+		// Border CSS
 		this.css("-webkit-border-radius", "5px");
 		this.css("-moz-border-radius", "5px");
 		this.css("border-radius", "5px");	
@@ -28,6 +28,7 @@ Crafty.c("Player",{
 		this.css("border-style", "solid");	
 		this.css("border-width", "1px");	
 		this.css("border-color", "000000");	
+
 
 		this.bind('EnterFrame', function(from) {
 		    if(this.hit('Player')) {
