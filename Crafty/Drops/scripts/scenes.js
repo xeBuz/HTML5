@@ -25,7 +25,8 @@ Crafty.scene("Game", function(){
   	createDisplay()
 	createFloor();	
 	createPlayers();  
-	//createLevel(level);
+	createBlocks();
+
 
 	function ChangeColor(){
 		do {

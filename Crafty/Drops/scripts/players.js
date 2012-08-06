@@ -29,13 +29,22 @@ Crafty.c("Player",{
 		this.css("border-width", "1px");	
 		this.css("border-color", "000000");	
 
+<<<<<<< HEAD
 
+=======
+		/*
+>>>>>>> 32e0c9f16403b518c6e6409dce044c105156ba59
 		this.bind('EnterFrame', function(from) {
 		    if(this.hit('Player')) {
        			this.attr({x: from.x, y:from.y});
 		   }
 		})	
-		
+		*/
+		this.bind('Moved', function(from) {
+    		if(this.hit('2D')) {
+       			this.attr({x: from.x, y:from.y});
+    		}
+  		});
 	},
 
 	speed_slow: function(){	

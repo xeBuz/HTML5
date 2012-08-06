@@ -1,5 +1,5 @@
 BAR_SIZE = 20
-FLOOR_SIZE = 3
+FLOOR_SIZE = 2
 
 
 // Create Floor, used by Gravity of the other objects
@@ -36,7 +36,7 @@ function createDisplay(){
 
 
 Crafty.c("Bar",{
-	
+
 	init: function(){
 		this.requires("2D, DOM, Solid, Color")
 	},
