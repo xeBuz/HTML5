@@ -5,8 +5,8 @@ LIFE = 100
 SIZE = 30
 
 function createPlayers(){
-	pBlue = Crafty.e("LeftPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
-	pRed = Crafty.e("RightPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	pBlue = Crafty.e("Player, LeftPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	pRed = Crafty.e("Player, RightPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
 
 };
 
@@ -17,11 +17,7 @@ Crafty.c("Player",{
 	_jump : JUMP,
 
 	init: function(){
-<<<<<<< HEAD
-		this.requires("2D, DOM, Solid, Floor, Color, Collision, SolidHitBox, Gravity, Twoway, Delay")
-=======
-		this.requires("2D, DOM, Solid, Color, SolidHitBox, Gravity, Twoway, Delay")
->>>>>>> 9bd13a2159901da06f1f82df4de07cab0918205e
+		this.requires("2D, DOM, Solid, Floor, Color, Gravity, Twoway, Delay")
 		this.gravity("Floor").gravityConst(0.085)	
 		
 		// Border CSS
@@ -33,20 +29,20 @@ Crafty.c("Player",{
 		this.css("border-width", "1px");	
 		this.css("border-color", "000000");	
 
-  
+  		/*
 		this.bind('EnterFrame', function(from) {
 		    if(this.hit('Player')) {
        			this.attr({x: from.x, y:from.y});
 		   }
 		});	
-
-		/*
+		*/
+		
 		this.bind('Moved', function(from) {
     		if(this.hit('2D')) {
        			this.attr({x: from.x, y:from.y});
     		}
   		});
-		*/
+		
 	},
 
 	speed_slow: function(){	
@@ -88,10 +84,10 @@ Crafty.c("Player",{
 Crafty.c("RightPlayer",{
 	init: function(){
 		this.attr({x: 30,  // 30,
-		   	   y: 30,
-		   	   w: this._size,
-		   	   h: this._size})  
-	        this.requires("Player)
+		   	   	   y: 30,
+		   	   	   w: this._size,
+		   	       h: this._size})  
+	    this.requires("Player")
 		this.color(color_right)
 		this.multiway(this._speed, { W: -90, A: 180, D: 0 });						
 		
@@ -101,10 +97,10 @@ Crafty.c("RightPlayer",{
 Crafty.c("LeftPlayer",{
 	init: function(){
 		this.attr({x: 100,  // 30,
-   	                   y: 100,
+   	               y: 100,
    		           w: this._size,
-   		   	   h: this._size})  
-		this.requires("Player)
+   		   	   	   h: this._size})  
+		this.requires("Player")
 		this.color(color_left)	
 		this.multiway(this._speed, {UP_ARROW: -90, RIGHT_ARROW: 0, LEFT_ARROW: 180 });
 	}

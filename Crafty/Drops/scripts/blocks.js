@@ -15,7 +15,7 @@ Crafty.c("Block",{
 		   	    	       y: 0 - (this.size / 2),
 		   		           w: this.size,
 		   		           h: this.size})  	   
-			this.random_color()
+			//this.random_color()
 			// Second parameter MUST be a level-parameter
 			this.delay(function() {this.drop()}, 700);
 
@@ -28,8 +28,9 @@ Crafty.c("Block",{
 			
 	},
 
-	/*random_color: function(){
-		
+	/*
+	random_color: function(){
+	
 
 	}*/
 });	
