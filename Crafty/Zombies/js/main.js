@@ -1,9 +1,14 @@
-var WIDTH = 300
-var HEIGHT = 200
+var WIDTH = 600
+var HEIGHT = 300
 
 
 window.onload = function() {
-	Crafty.init(WIDTH, HEIGHT, 320);
+	Crafty.init(WIDTH, HEIGHT, 30);
 	Crafty.canvas.init();
 
+	// Crear Player
+	Crafty.e("2D, DOM, Player")
+
 };
+
+
