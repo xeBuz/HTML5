@@ -28,14 +28,11 @@ Crafty.c("Block",{
 			
 	},
 
-	random_color: function(){
+	/*random_color: function(){
 		
 
-	}
+	}*/
 });	
-
-
-
 
 
 //function createBlocks(SPEED, TIME, SIZE){

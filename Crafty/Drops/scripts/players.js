@@ -17,7 +17,7 @@ Crafty.c("Player",{
 	_jump : JUMP,
 
 	init: function(){
-		this.requires("2D, DOM, Solid, Color, Collision, SolidHitBox, Gravity, Twoway, Delay")
+		this.requires("2D, DOM, Solid, Floor, Color, Collision, SolidHitBox, Gravity, Twoway, Delay")
 		this.gravity("Floor").gravityConst(0.085)	
 		
 		// Border Radius CSS
