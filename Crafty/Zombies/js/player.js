@@ -11,10 +11,12 @@ Crafty.c("Player",{
 		this.requires("Collision, Solid");
 		this.requires("Color").color("Black");
 		this.requires("Multiway").multiway({x:1,y:1}, 
-										   {UP_ARROW: -90, DOWN_ARROW: 90, RIGHT_ARROW: 0, LEFT_ARROW: 180, 
-		                    				W: -90, S: 90, D: 0, A: 180});
-		
-		
+										   {W: -90, S: 90, D: 0, A: 180});
+				
+		this.bind("keydown"), function(){
+			this.shot(e.keyCode, this.x, this.y)
+		}
+
 		// Explota con Zombies
 		this.onHit("Zombies", function(){
     			this.destroy();
@@ -26,5 +28,18 @@ Crafty.c("Player",{
        			this.attr({x: from.x, y:from.y});
 		   }
 		})
-	}
+	},
+
+	shot: function(key, x, y){
+		//UP_ARROW: -90, DOWN_ARROW: 90, RIGHT_ARROW: 0, LEFT_ARROW: 180, 
+		//if (key == Crafty.keys.RA) 
+			alert (key);
+
+/*
+       if (e.keyCode === ) move.right = true;
+        if (e.keyCode === Crafty.keys.LA) move.left = true;
+        if (e.keyCode === Crafty.keys.UA) move.up = true;
+        if (e.keyCode === Crafty.keys.DA) move.down = true;
+*/
+	},
 });
