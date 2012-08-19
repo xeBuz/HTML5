@@ -1,6 +1,5 @@
 function createZombies(){
 	zombie = Crafty.e("2D, DOM, Zombie");
-	zombie.follow(1)
 
 
 };
@@ -10,7 +9,6 @@ Crafty.c("Zombie",{
 	_posX : Math.floor(Math.random()* HEIGHT),
 	_posY : 1,
 
-
 	init: function(){		
 		this.attr({x: this._posX, 
 			   	   y: this._posY,
@@ -18,14 +16,28 @@ Crafty.c("Zombie",{
 			       h: this._size})		
 		this.requires("Collision, Solid, Color, MoveTo");
 		this.color("Red");
+	
+		var player = Crafty("Player");
+
 
 		this.bind("EnterFrame", function () {
-			++this.x;
-        	++this.y;
+			player = Crafty(player[0]);
+
+			if (this.x < player.x)
+				this.x++;
+			else
+				this.x--;
+
+			if (this.y < player.y)
+				this.y++;
+			else
+				this.y--;
+
+
 		})
 
 		// Explota con Zombies
-		this.onHit("Zombies", function(){
+		this.onHit("Zombie", function(){
     			this.destroy();
 		})
 
