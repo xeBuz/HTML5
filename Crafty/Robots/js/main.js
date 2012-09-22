@@ -1,5 +1,5 @@
-var WIDTH = 600
-var HEIGHT = 300
+var WIDTH = 800
+var HEIGHT = 500
 
 
 window.onload = function() {
@@ -7,10 +7,10 @@ window.onload = function() {
 	Crafty.canvas.init();
 
 	// Crear Player
-	var player = Crafty.e("2D, DOM, Player")
+	player = Crafty.e("2D, DOM, Player")
 
 
-	createZombies(player);
+	populateRobots();
 };
 
 

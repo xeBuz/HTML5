@@ -1,20 +1,22 @@
-function createZombies(){
-	zombie = Crafty.e("2D, DOM, Zombie");
-
-
+function populateRobots(){
+	(function(){
+	    // Genera un nuevo zombie, y como el init del componente establece que
+	    // la posicion X e Y son aleatorias, aparece en cualquier lado de la pantalla        
+	    var robot = Crafty.e("2D, Robot");
+	              setTimeout(arguments.callee, 1000);
+	})();
 };
 
-Crafty.c("Zombie",{
+
+Crafty.c("Robot",{
 	_size : 20,
-	_posX : Math.floor(Math.random()* HEIGHT),
-	_posY : 1,
 
 	init: function(){		
-		this.attr({x: this._posX, 
-			   	   y: this._posY,
+		this.attr({x: Math.floor(Math.random() * HEIGHT), 
+                   y: Math.floor(Math.random() * WIDTH),
 			   	   w: this._size,
 			       h: this._size})		
-		this.requires("Collision, Solid, Color, MoveTo");
+		this.requires("DOM, Collision, Solid, Color, MoveTo");
 		this.color("Red");
 	
 		var player = Crafty("Player");
@@ -37,7 +39,7 @@ Crafty.c("Zombie",{
 		})
 
 		// Explota con Zombies
-		this.onHit("Zombie", function(){
+		this.onHit("Robot", function(){
     			this.destroy();
 		})
 
