@@ -16,12 +16,12 @@ Crafty.c("MainPlayer",{
 		   })
 	}
 });
-
+ 
 Crafty.c("TestPlayer",{
 	size    : 20,
 
 	init: function(){
-			this.requires("Solid, Color, Collision,  Gravity, Twoway"),
+			this.requires("Color, Collision, Solid,  Gravity, Twoway, Box2D"),
     	  		this.attr({x: 30,  // 30,
 		   	    	   y: 30,
 		   		   w: this.size,
@@ -29,12 +29,16 @@ Crafty.c("TestPlayer",{
 			this.color("red")
 			this.gravity("Floor")
 			this.twoway(3,3)
+			
+			//this.box2d({
+             //           bodyType: 'dynamic'
+             //    	  })
 		        
-		   this.bind('Moved', function(from) {
-		   		if(this.hit('Block')) {
-		       		this.attr({x: from.x, y:from.y});
-		       	}
-		   })
+		   //this.bind('Moved', function(from) {
+		   //		if(this.hit('Block')) {
+		   //    		this.attr({x: from.x, y:from.y});
+		   //    	}
+		   //})
 			
 	}
 		
@@ -50,7 +54,7 @@ function createPlayer(){
 Crafty.c('Controls',{
 	_move:  {left: false, right: false, up: false, down: false}, 
 	_speed: 3,
-	_wasd : false
+	_wasd : false,
 
 	Controls: function(speed){
 	   	if (speed) this._speed = speed;

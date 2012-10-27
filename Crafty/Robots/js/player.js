@@ -17,8 +17,8 @@ Crafty.c("Player",{
 			this.shot(e.keyCode)
 		}
 
-		// Explota con Zombies
-		this.onHit("Zombies", function(){
+		// Muere con Robots
+		this.onHit("Robots", function(){
     			this.destroy();
 		})
 

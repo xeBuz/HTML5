@@ -11,7 +11,7 @@ function start(){
   	  	     
 	Crafty.scene("loading");
 };
-
+ 
 
 function LoadSprites(){
 	Crafty.sprite(25, "images/kupo.png", {
@@ -64,6 +64,10 @@ Crafty.scene("loading", function() {
 	Crafty.background("gray");
 	Crafty.e("2D, DOM, Text").attr({w: 100, h: 20, x: 150, y: 120})
   		  .text("Cargando...")
+	
+	Crafty.modules({ 'crafty-debug-bar': 'release' }, function () {
+	    Crafty.debugBar.show();
+	});
        
     Crafty.scene("game");
 });
@@ -97,7 +101,7 @@ function createFloor(){
 
 Crafty.c("Floor",{
 	init: function(){ 
-			this.requires("Solid, Color, Collision")
+			this.requires("Solid, Color, Collision, Box2D")
 			this.color("Black")
 			
 	}
