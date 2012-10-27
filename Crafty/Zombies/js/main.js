@@ -10,7 +10,7 @@ window.onload = function() {
 	var player = Crafty.e("2D, DOM, Player")
 
 
-	createZombies(player);
+	createZombies();
 };
 
 

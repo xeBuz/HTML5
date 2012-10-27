@@ -1,17 +1,19 @@
 function createZombies(){
-	zombie = Crafty.e("2D, DOM, Zombie");
 
+	(function(){
+	    var zombie = Crafty.e("2D, DOM, Zombie");
+      	        setTimeout(arguments.callee, 1000);
+	})();
 
 };
 
+
 Crafty.c("Zombie",{
-	_size : 20,
-	_posX : Math.floor(Math.random()* HEIGHT),
-	_posY : 1,
+	size : 20,
 
 	init: function(){		
-		this.attr({x: this._posX, 
-			   	   y: this._posY,
+		this.attr({x: Math.floor(Math.random() * HEIGHT), 
+			   	   y: Math.floor(Math.random() * HEIGHT),
 			   	   w: this._size,
 			       h: this._size})		
 		this.requires("Collision, Solid, Color, MoveTo");
@@ -36,14 +38,10 @@ Crafty.c("Zombie",{
 
 		})
 
-		// Explota con Zombies
-		this.onHit("Zombie", function(){
-    			this.destroy();
-		})
 
 		// No traspasa las paredes
 		this.bind('Moved', function(from) {
-		    if(this.hit('Wall')) {
+		    if(this.hit('Zombie')) {
        			this.attr({x: from.x, y:from.y});
 		   }
 		})
