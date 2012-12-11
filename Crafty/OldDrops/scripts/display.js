@@ -1,24 +1,26 @@
-BAR_SIZE = 20
-FLOOR_SIZE = 2
+BAR_SIZE = 10
+FLOOR_SIZE = 0
 
 
 // Create Floor, used by Gravity of the other objects
 function createFloor(){	
 
-	Crafty.c("Floor",{
-	init: function(){ 
-			this.requires("Solid, Color, Collision")
-			this.color("Black")
-			
-		}
-	});	
-	
 	// Create the Floor
-	Crafty.e("2D, DOM, Floor")
-		  .attr({x: 0, 
-				 y: HEIGHT - BAR_SIZE -FLOOR_SIZE, 
-			     w: WIDTH,
-			     h: FLOOR_SIZE});
+	var Floor = Crafty.e("2D, DOM, Floor, Box2D")
+				.attr({x: 0, 
+					   y: HEIGHT - BAR_SIZE -FLOOR_SIZE, 
+			     	   w: WIDTH,
+				       h: FLOOR_SIZE})
+			    .requires("Solid, Color, Collision")
+				.color("Black")		
+
+				.box2d({
+                    bodyType: 'static',
+                    shape: [
+                           		[0, HEIGHT],
+                                [WIDTH, HEIGHT]
+                           ]
+                    });  
 };
 
 
@@ -39,6 +41,7 @@ Crafty.c("Bar",{
 
 	init: function(){
 		this.requires("2D, DOM, Solid, Color")
+		this.attr({alpha : 0.9})
 	},
 });
 
@@ -49,7 +52,7 @@ Crafty.c("LeftBar",{
 		this.color(color_left)
 		this.attr({x: WIDTH / 2,
 				   y: HEIGHT - BAR_SIZE,
-				   w: (HEIGHT / 2) ,
+				   w: (WIDTH / 2) ,
 				   h: BAR_SIZE})
 	}
 });
@@ -62,7 +65,7 @@ Crafty.c("RightBar",{
 		this.color(color_right)
 		this.attr({x: 0,
 				   y: HEIGHT - BAR_SIZE,
-				   w: (HEIGHT / 2) ,
+				   w: (WIDTH / 2) ,
 				   h: BAR_SIZE})
 	}
 

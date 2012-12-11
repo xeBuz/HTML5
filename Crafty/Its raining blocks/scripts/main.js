@@ -9,8 +9,11 @@ function start(){
 
     Crafty.box2D.init(0, 10, 32, true);
 		
-	LoadSprites();
-  	  	     
+
+	  Crafty.modules({ 'crafty-debug-bar': 'DEV' }, function () {
+	    Crafty.debugBar.show();
+	  });
+	  	  	     
 	Crafty.scene("loading");
 };
  

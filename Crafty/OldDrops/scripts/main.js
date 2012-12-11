@@ -1,4 +1,4 @@
-var HEIGHT = 400
+var HEIGHT = 600
 var WIDTH = 400
 var level = 1
 
@@ -13,8 +13,6 @@ function start(){
 	Crafty.Canvas;
 		
 	Crafty.scene("LoadResources");
-
-
 
 };
 

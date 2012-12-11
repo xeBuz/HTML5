@@ -6,7 +6,7 @@ function createBlocks(SPEED, TIME, SIZE){
 	(function(){
 	    var block = Crafty.e("Block")
       	        setTimeout(arguments.callee, TIME);
-	})();
+	})(); 
  
 };
 

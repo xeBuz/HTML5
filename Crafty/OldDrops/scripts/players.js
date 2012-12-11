@@ -2,7 +2,7 @@
 SPEED = 4
 JUMP = 2
 LIFE = 100
-SIZE = 30
+SIZE = 30 
 
 function createPlayers(){
 	pBlue = Crafty.e("Player, LeftPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
@@ -17,9 +17,8 @@ Crafty.c("Player",{
 	_jump : JUMP,
 
 	init: function(){
-		this.requires("2D, DOM, Solid, Floor, Color, Gravity, Twoway, Delay")
-		this.gravity("Floor").gravityConst(0.085)	
-		
+		this.requires("2D, DOM, Solid, Floor, Color, Multiway, Delay")
+
 		// Border CSS
 		this.css("-webkit-border-radius", "5px");
 		this.css("-moz-border-radius", "5px");
@@ -38,7 +37,7 @@ Crafty.c("Player",{
 		*/
 		
 		this.bind('Moved', function(from) {
-    		if(this.hit('2D')) {
+    		if(this.hit('Player')) {
        			this.attr({x: from.x, y:from.y});
     		}
   		});
@@ -78,30 +77,31 @@ Crafty.c("Player",{
 		// TODO
 		Crafty.scene("GameOver");
 	}
+
 });	
 
 
 Crafty.c("RightPlayer",{
 	init: function(){
-		this.attr({x: 30,  // 30,
-		   	   	   y: 30,
+		this.attr({x: 120,  // 30,
+		   	   	   y: 250,
 		   	   	   w: this._size,
 		   	       h: this._size})  
 	    this.requires("Player")
 		this.color(color_right)
-		this.multiway(this._speed, { W: -90, A: 180, D: 0 });						
+		this.multiway(this._speed, { W: -90, A: 180, D: 0, S: 90 });						
 		
 	},
 });	
 
 Crafty.c("LeftPlayer",{
 	init: function(){
-		this.attr({x: 100,  // 30,
-   	               y: 100,
+		this.attr({x: 260,  // 30,
+   	               y: 250,
    		           w: this._size,
    		   	   	   h: this._size})  
 		this.requires("Player")
 		this.color(color_left)	
-		this.multiway(this._speed, {UP_ARROW: -90, RIGHT_ARROW: 0, LEFT_ARROW: 180 });
+		this.multiway(this._speed, {UP_ARROW: -90, RIGHT_ARROW: 0, LEFT_ARROW: 180, DOWN_ARROW: 90 });
 	}
 });	
