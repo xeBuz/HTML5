@@ -11,7 +11,7 @@ function createLevel(numLvl){
 
 
 function createWorld(){	
-	
+	 
 };
 
 function setLevelValue(){

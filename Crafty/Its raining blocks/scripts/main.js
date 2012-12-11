@@ -5,7 +5,9 @@ var level = 1
 // Inicia el juego
 function start(){
 	Crafty.init(WIDTH, HEIGHT);
-	Crafty.Canvas;
+	Crafty.canvas.init();
+
+    Crafty.box2D.init(0, 10, 32, true);
 		
 	LoadSprites();
   	  	     
@@ -30,8 +32,6 @@ Crafty.scene("game", function(){
 	Crafty.e("2D, DOM, Image")
           .attr({w: Crafty.viewport.width, h: Crafty.viewport.height})
           .image("images/wall.jpg", "repeat");
-        
-//	Crafty.e("2D, DOM, drawFPS");
   
 	createFloor();	
 	createPlayer();  
@@ -39,23 +39,6 @@ Crafty.scene("game", function(){
 	
 });
 
-
-//FPS component
-Crafty.c("drawFPS", {
-        init: function() {
-                var fps=0;
-                this.attr({ w: 111, 
-			    h: 12, 
-			    x: 20, 
-			    y: 20, 
-			    z: 3 });
-		this.requires("Timer, Text")
-                this.bind("EnterFrame", function(){
-                        fps = Crafty.timer.getFPS();
-                                this.text("FPS: "+ fps);
-                });
-        }
-}); 
 
 
 // Scenes lists: Loading, Game	
@@ -65,9 +48,6 @@ Crafty.scene("loading", function() {
 	Crafty.e("2D, DOM, Text").attr({w: 100, h: 20, x: 150, y: 120})
   		  .text("Cargando...")
 	
-	Crafty.modules({ 'crafty-debug-bar': 'release' }, function () {
-	    Crafty.debugBar.show();
-	});
        
     Crafty.scene("game");
 });
@@ -77,25 +57,43 @@ function createFloor(){
 	var size = 5
 	
 	// Create the Floor
-	Crafty.e("2D, DOM, Floor")
-		  .attr({x: 0, 
-				 y: HEIGHT - size, 
-			     w: WIDTH,
-			     h: size});
-	
-		  
+	Crafty.e("2D, DOM, Floor, Box2D")
+			.attr({ x: 0, y: 0})
+            .box2d({
+                    bodyType: 'static',
+                    shape: [
+                           		[0, HEIGHT],
+                                [WIDTH, HEIGHT]
+                           ]
+                    });
+/*
     // Create the Walls
-	Crafty.e("2D, DOM, Floor")
+	Crafty.e("2D, DOM, Floor, Box2D")
 		  .attr({x: WIDTH - size,
 				 y: 0, 
 			     w: size,
-			     h: HEIGHT});
-	Crafty.e("2D, DOM, Floor")
+			     h: HEIGHT}),
+		  .box2d({
+            	bodyType: 'static',
+            	shape: [
+                            [attr.x, HEIGHT - size],
+                            [WIDTH, size]
+                        ]
+            });
+
+	Crafty.e("2D, DOM, Floor, Box2D")
 		  .attr({x: 0, 
 				 y: 0, 
 			     w: size,
-			     h: HEIGHT});
-
+			     h: HEIGHT}),
+          .box2d({
+            	bodyType: 'static',
+            	shape: [
+                            [0, 0],
+                            [size, HEIGHT]
+                        ]
+            });		  
+*/
 };
 
 

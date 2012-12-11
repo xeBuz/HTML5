@@ -21,32 +21,24 @@ Crafty.c("TestPlayer",{
 	size    : 20,
 
 	init: function(){
-			this.requires("Color, Collision, Solid,  Gravity, Twoway, Box2D"),
+			this.requires("2D, DOM, Color, Collision, Solid,  Gravity, Twoway, Box2D"),
     	  		this.attr({x: 30,  // 30,
-		   	    	   y: 30,
-		   		   w: this.size,
-		   		   h: this.size})  	   
+		   	    	       y: 30,
+		   		           w: this.size,
+		   		           h: this.size})  	   
 			this.color("red")
 			this.gravity("Floor")
 			this.twoway(3,3)
 			
-			//this.box2d({
-             //           bodyType: 'dynamic'
-             //    	  })
-		        
-		   //this.bind('Moved', function(from) {
-		   //		if(this.hit('Block')) {
-		   //    		this.attr({x: from.x, y:from.y});
-		   //    	}
-		   //})
-			
+			this.box2d({
+                        bodyType: 'dynamic'
+                 	  })			
 	}
-		
 });
 
 
 function createPlayer(){
-	player = Crafty.e("2D, DOM, TestPlayer")	
+	player = Crafty.e("TestPlayer")	
 };
 
 
