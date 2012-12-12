@@ -1,9 +1,3 @@
-var SPEED = 0
-var TIME = 1500
-var SIZE = 40
-var GRAVITY = 0.1
-
-
 Crafty.c("Block",{ 
 	size    : 20,    // From parameters
 	posFrom : 0, 
@@ -17,15 +11,17 @@ Crafty.c("Block",{
 				   h: this.size})
 		//this.random_color()
 		// Second parameter MUST be a level-parameter
-		this.color("white")
-		this.delay(function() {this.drop()}, 700);
+		this.color(random_color())
+		this.delay(function() {this.drop()}, 200);
 
-
+		this.onHit("Floor", function() {
+			this.destroy();
+		});
 	},
-   
+
 	drop: function(){
 		//this.attr({ this.x: (Math.floor(Math.random()* this.div) * this.size) })
-		this.requires("Gravity").gravity("Floor").gravityConst(GRAVITY)	
+		this.requires("Gravity").gravity("Floor").gravityConst(BLOCK_GRAVITY)	
 
 	},
 
@@ -41,7 +37,11 @@ function createBlocks(){
 	// Entra en un loop que va generando los bloques.
 	(function(){
 	    var block = Crafty.e("2D, DOM, Block")
-      	        setTimeout(arguments.callee, TIME);
+      	        setTimeout(arguments.callee, BLOCK_TIME);
+      	if (BLOCK_TIME > 200) 
+      		{
+      			BLOCK_TIME--;
+      		}
 	})();
 
 };

@@ -1,9 +1,3 @@
-// Default vars
-SPEED = 4
-JUMP = 2
-LIFE = 100
-SIZE = 30 
-
 function createPlayers(){
 	pBlue = Crafty.e("Player, LeftPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
 	pRed = Crafty.e("Player, RightPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
@@ -11,18 +5,17 @@ function createPlayers(){
 };
 
 Crafty.c("Player",{
-	_size : SIZE,
-	_life : LIFE,
-	_speed : SPEED,
-	_jump : JUMP,
+	_size : PLAYER_SIZE,
+	_life : PLAYER_LIFE,
+	_speed : PLAYER_SPEED,
 
 	init: function(){
-		this.requires("2D, DOM, Solid, Floor, Color, Multiway, Delay")
+		this.requires("2D, DOM, Solid, Color, Multiway, Delay")
 
 		// Border CSS
-		this.css("-webkit-border-radius", "5px");
-		this.css("-moz-border-radius", "5px");
-		this.css("border-radius", "5px");	
+		this.css("-webkit-border-radius", "3px");
+		this.css("-moz-border-radius", "3px");
+		this.css("border-radius", "3px");	
 
 		this.css("border-style", "solid");	
 		this.css("border-width", "1px");	

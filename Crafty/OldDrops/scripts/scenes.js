@@ -1,7 +1,7 @@
 
 Crafty.scene("LoadResources", function() {
    	// Black background with some loading text
-	Crafty.background("gray");
+	Crafty.background("Black");
 	Crafty.e("2D, DOM, Text").attr({w: 100, h: 20, x: 150, y: 120})
   		  .text("Cargando...")
        
@@ -33,8 +33,6 @@ Crafty.scene("Game", function(){
 			temp_color =  colors[Math.floor(Math.random()*colors.length)]
 		}
 		while ((temp_color != color_left) && (temp_color != color_right));
-
-		//return temp_colors
 		
 	}	
 });
