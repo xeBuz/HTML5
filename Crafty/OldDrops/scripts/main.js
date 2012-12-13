@@ -1,4 +1,4 @@
-var HEIGHT = 600
+var HEIGHT = 500
 var WIDTH = 400
 
 var BAR_SIZE = 15
@@ -23,6 +23,9 @@ var colors = ["Red", "Blue", "Green", "Yellow", "Grey", "White", "Purple"]
 function start(){
 	Crafty.init(WIDTH, HEIGHT);
 	Crafty.Canvas;
+	
+	//Crafty.debugBar.show();
+
 		
 	Crafty.scene("LoadResources");
 

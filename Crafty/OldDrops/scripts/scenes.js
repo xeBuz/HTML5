@@ -1,9 +1,15 @@
 
 Crafty.scene("LoadResources", function() {
    	// Black background with some loading text
-	Crafty.background("Black");
+	//Crafty.background("Black");
 	Crafty.e("2D, DOM, Text").attr({w: 100, h: 20, x: 150, y: 120})
   		  .text("Cargando...")
+
+	// Set a Wallpaper
+	var bg = Crafty.e("2D, DOM, Image")
+                   .attr({w: WIDTH, h: HEIGHT})
+          		   .image("media/images/random_grey.png", "repeat");
+	Crafty.background('url(media/images/random_grey.png)');
        
     Crafty.scene("Menu");
 });
@@ -11,11 +17,6 @@ Crafty.scene("LoadResources", function() {
 
 Crafty.scene("Menu", function(){
 	
-	// Set a Wallpaper
-	Crafty.e("2D, DOM, Image")
-          .attr({w: Crafty.viewport.width, h: Crafty.viewport.height})
-          .image("images/wall.jpg", "repeat");
-    
 	Crafty.scene("Game");
 });
 
