@@ -6,10 +6,8 @@ Crafty.scene("LoadResources", function() {
   		  .text("Cargando...")
 
 	// Set a Wallpaper
-	var bg = Crafty.e("2D, DOM, Image")
-                   .attr({w: WIDTH, h: HEIGHT})
-          		   .image("media/images/random_grey.png", "repeat");
-	Crafty.background('url(media/images/random_grey.png)');
+	Crafty.background('url(media/images/ches.jpg)');
+
        
     Crafty.scene("Menu");
 });
@@ -27,6 +25,7 @@ Crafty.scene("Game", function(){
 	createFloor();	
 	createPlayers();  
 	createBlocks();
+	createScore();
 
 
 	function ChangeColor(){

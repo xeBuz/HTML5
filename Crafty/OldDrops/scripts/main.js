@@ -1,10 +1,10 @@
 var HEIGHT = 500
 var WIDTH = 400
 
-var BAR_SIZE = 15
+var BAR_SIZE = 20
 var FLOOR_SIZE = 1
 
-var PLAYER_SPEED = 100
+var PLAYER_SPEED = 6
 var PLAYER_LIFE = 100
 var PLAYER_SIZE = 35 
 
@@ -13,6 +13,8 @@ var BLOCK_SIZE = 40
 var BLOCK_GRAVITY = 0.1
 
 var level = 1
+var score
+var points = 0
 
 var color_right = "Red"
 var color_left = "Blue"

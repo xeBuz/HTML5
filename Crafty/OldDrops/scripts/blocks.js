@@ -1,7 +1,7 @@
 Crafty.c("Block",{ 
-	size    : 20,    // From parameters
+	size    : 20,    
 	posFrom : 0, 
-	posTo   : WIDTH, // This is for a To Do. A movable scene.
+	posTo   : WIDTH,
 	 
 	init: function(){
 		this.requires("Solid, Color, Collision, Delay"),
@@ -9,32 +9,30 @@ Crafty.c("Block",{
 				   y: 0 - (this.size / 2),
 				   w: this.size,
 				   h: this.size})
-		//this.random_color()
-		// Second parameter MUST be a level-parameter
 		this.color(random_color())
 		this.delay(function() {this.drop()}, 200);
 
+		console.log("New cube " + this.color() ) ;
+
 		this.onHit("Floor", function() {
-			this.destroy();
+			this.crash();
 		});
 	},
 
 	drop: function(){
-		//this.attr({ this.x: (Math.floor(Math.random()* this.div) * this.size) })
-		this.requires("Gravity").gravity("Floor").gravityConst(BLOCK_GRAVITY)	
-
+		this.requires("Gravity").gravity("Floor").gravityConst(BLOCK_GRAVITY);
+		setScore(1);
 	},
 
-	/*
-	random_color: function(){
+	crash: function(){
+		//console.log("Crash cube "+ this.color())
+		this.destroy();
 
-
-	}*/
+	}
 });	
 
 
 function createBlocks(){
-	// Entra en un loop que va generando los bloques.
 	(function(){
 	    var block = Crafty.e("2D, DOM, Block")
       	        setTimeout(arguments.callee, BLOCK_TIME);
@@ -43,5 +41,4 @@ function createBlocks(){
       			BLOCK_TIME--;
       		}
 	})();
-
 };

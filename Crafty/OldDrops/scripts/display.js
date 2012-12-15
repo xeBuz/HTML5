@@ -1,17 +1,15 @@
 
 // Create Floor, used by Gravity of the other objects
 function createFloor(){	
-	// Create the Floor
 	var Floor = Crafty.e("2D, DOM, Floor, Solid, Color, Collision")
 					  .attr({x: 0, 
 					   		 y: HEIGHT - BAR_SIZE - FLOOR_SIZE , 
 			     	   		 w: WIDTH,
 				       		 h: FLOOR_SIZE})
-					  .color("Black")		
 };
 
 function createDisplay(){
-	Crafty.e("2D, DOM, Solid, Color").color("Black")
+	Crafty.e("2D, DOM, Solid, Color")//.color("Black")
 			.attr({x: WIDTH / 2, 
 			       y: HEIGHT - BAR_SIZE, 
 			       w: FLOOR_SIZE,
@@ -22,10 +20,9 @@ function createDisplay(){
 }
 
 Crafty.c("Bar",{
-
 	init: function(){
 		this.requires("2D, DOM, Solid, Color, Floor")
-		this.attr({alpha : 0.9})
+		this.attr({alpha : 0.65})
 	},
 });
 
@@ -40,7 +37,6 @@ Crafty.c("LeftBar",{
 	}
 });
 
-
 Crafty.c("RightBar",{
 	init: function(){
 		this.requires("Bar")
@@ -51,3 +47,13 @@ Crafty.c("RightBar",{
 				   h: BAR_SIZE})
 	}
 });
+
+function createScore(){
+	score = Crafty.e("2D, DOM, Text, CSS").attr({ x: 5, y: 5 }).text(points);
+}
+
+function setScore(value){
+	points += value;
+	console.log(points);
+	score.text = points;
+}
