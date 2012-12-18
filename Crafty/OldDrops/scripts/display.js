@@ -49,11 +49,11 @@ Crafty.c("RightBar",{
 });
 
 function createScore(){
-	score = Crafty.e("2D, DOM, Text, CSS").attr({ x: 5, y: 5 }).text(points);
+	score = Crafty.e("2D, DOM, Text, CSS").attr({ x: 5, y: 5, w: 100 }).text(points);
 }
 
 function setScore(value){
+	console.log("points added "+ value)
 	points += value;
-	console.log(points);
-	score.text = points;
+	score.text("Score " + points);
 }

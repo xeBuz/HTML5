@@ -9,8 +9,8 @@ var PLAYER_LIFE = 100
 var PLAYER_SIZE = 35 
 
 var BLOCK_TIME = 1500
-var BLOCK_SIZE = 40
-var BLOCK_GRAVITY = 0.1
+var BLOCK_SIZE = 30
+var BLOCK_GRAVITY = 0.15
 
 var level = 1
 var score

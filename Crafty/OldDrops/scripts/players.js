@@ -1,6 +1,6 @@
 function createPlayers(){
-	playerLeft = Crafty.e("Player, LeftPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
-	playerRight = Crafty.e("Player, RightPlayer, Collision").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	playerLeft = Crafty.e("Player, LeftPlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
+	playerRight = Crafty.e("Player, RightPlayer").collision([0,0],[this._size,0],[this._size,this._size],[0,this._size])
 
 };
 
@@ -10,7 +10,7 @@ Crafty.c("Player",{
 	_speed : PLAYER_SPEED,
 
 	init: function(){
-		this.requires("2D, DOM, Solid, Color, Multiway, Delay")
+		this.requires("2D, DOM, Solid, Color, Multiway, Delay, Collision")
 
 		// Border CSS
 		this.css("-webkit-border-radius", "3px");
@@ -22,10 +22,22 @@ Crafty.c("Player",{
 		this.css("border-color", "000000");	
 
 
+		this.onHit('Block', function(e){
+			console.log(e)
+			if (e[0].obj.color() != this.color()) {
+				setScore(-5)
+				this.hit(10)
+			}
+			else {
+				setScore(10)
+			}
+			e[0].obj.crash()
+		});
+
+
 		this.bind('Moved', function(from) {
     		if(this.hit('Player')) {
        			this.attr({x: from.x, y:from.y});
-       			console.log(Crafty.viewport.width)
     		}
 
     		if((this.x + this.w) > WIDTH || this.x < 0 || (this.y + this.h) > HEIGHT || this.y < 0) {
@@ -45,7 +57,7 @@ Crafty.c("Player",{
 		this._speed = PLAYER_SPEED
 	},
 
-	hurt: function (damage){
+	hit: function (damage){
 		// Hurt Function
 		this._life =  this._life - damage
 		if (this._life < 1) {
